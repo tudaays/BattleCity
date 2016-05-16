@@ -10,81 +10,69 @@ window.onload = function(){
     canvas.height = window.innerHeight;
     document.body.appendChild(canvas);
     gameStart();
-    gameDrawer(context);
     setInterval(gameLoop,17);
-    // setInterval(()=>{
-    //     gameDrawer(context);
-    // }, 17};
 }
-var tank;
-var tankX = 100;
-var tankY = 100;
-var speedX = 0;
-var speedY = 0;
+var player;
 
 var gameLoop = function(){
     gameUpdate();
     gameDrawer(context);
 }
 function gameStart(){
-    tank = new Image();
-    tank.src = "images/tank_player1_down_c0_t2_s1.png";
+    player = new Tank(100,100);
 }
 
 function gameUpdate(){
-    tankX += speedX;
-    tankY += speedY;
+    player.update();
 }
 
 function gameDrawer(context){
+    context.fillStyle = "pink";
     context.fillRect(0,0,window.innerWidth, window.innerHeight);
-    context.drawImage(tank, tankX,tankY);
+    player.draw(context);
 }
 
 window.onkeydown = function(e){
     switch (e.keyCode){
         case 65://a
-            moveLeft();
+            player.move(3);
             break;
         case 68: //d
-            moveRight();
+            player.move(4);
             break;
         case 83: //s
-            moveDown();
+            player.move(2);
             break;
         case 87://w
-            moveUp();
+            player.move(1);
             break;
     }
 }
 
-function stopMove(){
-    speedX = 0;
-    speedY = 0;
-}
+
 
 window.onkeyup = function(e){
-    // speedX = 0;
-    // speedY = 0;
-    if (speedX = -2) stopMove();
-    else if(speedX = 2) stopMove();
-    else if(speedY = 2) stopMove();
-    else if(speedY = -2) stopMove();
+    switch (e.keyCode){
+        case 65://a
+            if(player.speedX < 0){
+                player.speedX = 0;
+            }
+            break;
+        case 68: //d
+            if(player.speedX > 0){
+                player.speedX = 0;
+            }
+            break;
+        case 83: //s
+            if(player.speedY > 0){
+                player.speedY = 0;
+            }
+            break;
+        case 87://w
+            if(player.speedY < 0){
+                player.speedY = 0;
+            }
+            break;
+    }
 }
 
-function moveUp(){
-    speedY = -2;
-    tank.src = "images/tank_player1_up_c0_t2_s1.png";
-}
-function moveDown(){
-    speedY = 2;
-    tank.src = "images/tank_player1_down_c0_t2_s1.png";
-}
-function moveLeft(){
-    speedX = -2;
-    tank.src = "images/tank_player1_left_c0_t2_s1.png";
-}
-function moveRight(){
-    speedX = 2;
-    tank.src = "images/tank_player1_right_c0_t2_s1.png";
-}
