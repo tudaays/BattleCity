@@ -1,0 +1,6 @@
+Làm thế nào để lấy lại thông tin các viên đạn đc bắn ra. VD t cần kiểm tra va chạm thì đương nhiên t cần
+lấy lại thông tin vị trí hiện tại của viên đạn và kích thước của nó để phục vụ cho việc kiểm tra va chạm
+
+
+Khi viên đạn được bắn thì truyền hướng di chuyển cho nó. Có hướng di chuyển => biết speedX và speedY bằng bao nhiêu rồi,
+không cần phải kiểm tra lại nó trong hàm move nữa. Làm nó luôn ở hàm constructor.
