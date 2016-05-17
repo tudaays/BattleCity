@@ -13,6 +13,7 @@ window.onload = function(){
     setInterval(gameLoop,17);
 }
 var player;
+var bullet;
 
 var gameLoop = function(){
     gameUpdate();
@@ -20,16 +21,19 @@ var gameLoop = function(){
 }
 function gameStart(){
     player = new Tank(100,100);
+    bullet = new Bullet(0,0,player.direction);
 }
 
 function gameUpdate(){
     player.update();
+    bullet.update();
 }
 
 function gameDrawer(context){
     context.fillStyle = "pink";
     context.fillRect(0,0,window.innerWidth, window.innerHeight);
     player.draw(context);
+    bullet.draw(context);
 }
 
 window.onkeydown = function(e){
@@ -45,6 +49,11 @@ window.onkeydown = function(e){
             break;
         case 87://w
             player.move(1);
+            break;
+        case 32://spacebar
+            bullet.x = player.x;
+            bullet.y = player.y;
+            bullet.move(player.direction);
             break;
     }
 }
