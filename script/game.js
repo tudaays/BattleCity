@@ -22,15 +22,15 @@ var gameLoop = function(){
 }
 function gameStart(){
     player = new Tank(100,100);
-    for(var i = 1; i<=1000; i++){
-        bullet[i] = new Bullet(0,0,1);
-    }
+    // for(var i = 1; i<=1000; i++){
+    //     bullet[i] = new Bullet(0,0,player.direction);}
+    bullet[0] = new Bullet(0,0,player.direction);
 }
 
 function gameUpdate(){
     player.update();
     if (countBullet!=0)
-        for(var i = 1; i<=countBullet; i++){
+        for(var i = 0; i<=countBullet; i++){
             bullet[i].update();
         }
 }
@@ -62,9 +62,10 @@ window.onkeydown = function(e){
             break;
         case 32://spacebar
             countBullet +=1;
-            bullet[countBullet].x = player.x;
-            bullet[countBullet].y = player.y;
-            bullet[countBullet].move(player.direction);
+            bullet[countBullet] = new Bullet(player.x,player.y,player.direction);
+            // bullet[countBullet].x = player.x;
+            // bullet[countBullet].y = player.y;
+            // bullet[countBullet].direction = player.direction;
             break;
     }
 }

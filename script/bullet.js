@@ -15,7 +15,28 @@ class Bullet{
         this.spriteDown.src = "images/bullet_down.png";
         this.spriteLeft.src = "images/bullet_left.png";
         this.spriteRight.src = "images/bullet_right.png";
-        this.sprite = this.spriteUp;
+        switch(this.direction){
+            case 1://up
+                this.speedX = 0;
+                this.speedY = -4;
+                this.sprite = this.spriteUp;
+                break;
+            case 2://down
+                this.speedX = 0;
+                this.speedY = 4;
+                this.sprite = this.spriteDown;
+                break;
+            case 3://left
+                this.speedX = -4;
+                this.speedY = 0;
+                this.sprite = this.spriteLeft;
+                break;
+            case 4://right
+                this.speedX = 4;
+                this.speedY = 0;
+                this.sprite = this.spriteRight;
+                break;
+        }
     }
     
     update(){
@@ -27,32 +48,32 @@ class Bullet{
         context.drawImage(this.sprite, this.x, this.y);
     }
     
-    move(direction){
-        switch(direction){
-            case 1://up
-                this.speedX = 0;
-                this.speedY = -4;
-                this.sprite = this.spriteUp;
-                this.direction = direction;
-                break;
-            case 2://down
-                this.speedX = 0;
-                this.speedY = 4;
-                this.sprite = this.spriteDown;
-                this.direction = direction;
-                break;
-            case 3://left
-                this.speedX = -4;
-                this.speedY = 0;
-                this.sprite = this.spriteLeft;
-                this.direction = direction;
-                break;
-            case 4://right
-                this.speedX = 4;
-                this.speedY = 0;
-                this.sprite = this.spriteRight;
-                this.direction = direction;
-                break;
-        }
-    }
+    // move(direction){
+    //     switch(direction){
+    //         case 1://up
+    //             this.speedX = 0;
+    //             this.speedY = -4;
+    //             this.sprite = this.spriteUp;
+    //             this.direction = direction;
+    //             break;
+    //         case 2://down
+    //             this.speedX = 0;
+    //             this.speedY = 4;
+    //             this.sprite = this.spriteDown;
+    //             this.direction = direction;
+    //             break;
+    //         case 3://left
+    //             this.speedX = -4;
+    //             this.speedY = 0;
+    //             this.sprite = this.spriteLeft;
+    //             this.direction = direction;
+    //             break;
+    //         case 4://right
+    //             this.speedX = 4;
+    //             this.speedY = 0;
+    //             this.sprite = this.spriteRight;
+    //             this.direction = direction;
+    //             break;
+    //     }
+    // }
 }
