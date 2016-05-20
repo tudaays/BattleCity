@@ -7,6 +7,8 @@ class Tank{
         this.y = y;
         this.speedX = 0;
         this.speedY = 0;
+        this.bullet = 0;
+        this.listBullet = new Array();
         this.sprite = new Image();
         this.spriteUp = new Image();
         this.spriteDown = new Image();
@@ -17,16 +19,21 @@ class Tank{
         this.spriteLeft.src = "images/tank_player1_left_c0_t2_s1.png";
         this.spriteRight.src = "images/tank_player1_right_c0_t2_s1.png";
         this.sprite = this.spriteUp;
-        this.direction = 1;
     }
 
     update(){
         this.x += this.speedX;
         this.y += this.speedY;
+        for (var i = 0; i < this.listBullet.length; i++){
+            this.listBullet[i].update();
+        }
     }
 
     draw(context){
         context.drawImage(this.sprite, this.x, this.y);
+        for (var i = 0; i < this.listBullet.length; i++){
+            this.listBullet[i].draw(context);
+        }
     }
 
     move(direction){
@@ -56,5 +63,11 @@ class Tank{
                 this.direction = direction;
                 break;
         }
+    }
+
+    shot(){
+        this.bullet += 1;
+        var bullet = new Bullet(this.x + 13, this.y +13, this.direction);
+        this.listBullet.push(bullet);
     }
 }

@@ -47,33 +47,4 @@ class Bullet{
     draw(context){
         context.drawImage(this.sprite, this.x, this.y);
     }
-    
-    // move(direction){
-    //     switch(direction){
-    //         case 1://up
-    //             this.speedX = 0;
-    //             this.speedY = -4;
-    //             this.sprite = this.spriteUp;
-    //             this.direction = direction;
-    //             break;
-    //         case 2://down
-    //             this.speedX = 0;
-    //             this.speedY = 4;
-    //             this.sprite = this.spriteDown;
-    //             this.direction = direction;
-    //             break;
-    //         case 3://left
-    //             this.speedX = -4;
-    //             this.speedY = 0;
-    //             this.sprite = this.spriteLeft;
-    //             this.direction = direction;
-    //             break;
-    //         case 4://right
-    //             this.speedX = 4;
-    //             this.speedY = 0;
-    //             this.sprite = this.spriteRight;
-    //             this.direction = direction;
-    //             break;
-    //     }
-    // }
 }
