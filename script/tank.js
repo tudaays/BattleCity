@@ -22,24 +22,8 @@ class Tank{
     }
 
     update(){
-        var isMove = true;
-        var rect1 = {x:this.x+this.speedX, y:this.y+this.speedY,
-            width: 32, height: 32};
-        for(var i=0; i <arrBrick.length; i++){
-            var rect2 = {x:arrBrick[i].x,y:arrBrick[i].y, width:16,height:16};
-            if(this.checkCollision(rect1,rect2)==true){
-                isMove = false;
-                break;
-            }
-        }
-        for(var i=0; i <arrSteel.length; i++){
-            var rect2 = {x:arrSteel[i].x,y:arrSteel[i].y, width:16,height:16};
-            if(this.checkCollision(rect1,rect2)==true){
-                isMove = false;
-                break;
-            }
-        }
-        if (isMove ==true){
+        //var isMove = true;
+        if (this.checkTankBrickCollision()==false){
             this.x += this.speedX;
             this.y += this.speedY;
         }
@@ -53,6 +37,50 @@ class Tank{
         context.drawImage(this.sprite, this.x, this.y);
         for (var i = 0; i < this.listBullet.length; i++){
             this.listBullet[i].draw(context);
+        }
+    }
+
+    checkTankBrickCollision(){
+        var rect1 = {x:this.x+this.speedX, y:this.y+this.speedY,
+            width: 32, height: 32};
+        for(var i=0; i <arrBrick.length; i++){
+            var rect2 = {x:arrBrick[i].x,y:arrBrick[i].y, width:16,height:16};
+            if(this.checkCollision(rect1,rect2)==true){
+                return true;
+                break;
+            }
+        }
+        for(var i=0; i <arrSteel.length; i++){
+            var rect2 = {x:arrSteel[i].x,y:arrSteel[i].y, width:16,height:16};
+            if(this.checkCollision(rect1,rect2)==true){
+                return true;
+                break;
+            }
+        }
+        return false;
+    }
+
+    checkBulletBrickCollision(){
+        for(var i = 0; i< this.listBullet.length; i++){
+            var rect1 = {x: this.listBullet[i].x, y: this.listBullet[i].y, width : 5, height: 5} 
+            for(var j = 0; j< arrBrick.length; j++){
+                var rect2 = {x: arrBrick[j].x, y: arrBrick[j].y, width : 16, height: 16} 
+                if (this.checkCollision(rect1,rect2)) {
+                    this.listBullet.pop();
+                    arrBrick.splice(j,1);
+                    break;
+                }
+            }
+        }
+        for(var i = 0; i< this.listBullet.length; i++){
+            var rect1 = {x: this.listBullet[i].x, y: this.listBullet[i].y, width : 2, height: 2} 
+            for(var j = 0; j< arrSteel.length; j++){
+                var rect2 = {x: arrSteel[j].x, y: arrSteel[j].y, width : 16, height: 16} 
+                if (this.checkCollision(rect1,rect2)) {                    
+                    this.listBullet.splice(i,1);
+                    break;
+                }
+            }
         }
     }
 
@@ -94,6 +122,7 @@ class Tank{
         }
         return false;
     }
+    
     shot(){
         this.bullet += 1;
         var bullet = new Bullet(this.x + 13, this.y +13, this.direction);

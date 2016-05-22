@@ -66,6 +66,7 @@ function gameStart(){
 
 function gameUpdate(){
     player.update();
+    player.checkBulletBrickCollision();
 }
 
 function gameDrawer(context){
